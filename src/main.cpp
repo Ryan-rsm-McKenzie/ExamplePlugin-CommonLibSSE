@@ -1,8 +1,6 @@
 ﻿#include "common/IDebugLog.h"  // IDebugLog
 #include "skse64_common/skse_version.h"  // RUNTIME_VERSION
 
-#include <ShlObj.h>  // CSIDL_MYDOCUMENTS
-
 #include "version.h"  // VERSION_VERSTRING, VERSION_MAJOR
 
 #include "SKSE/API.h"
@@ -11,9 +9,9 @@
 extern "C" {
 	bool SKSEPlugin_Query(const SKSE::QueryInterface* a_skse, SKSE::PluginInfo* a_info)
 	{
-		gLog.OpenRelative(CSIDL_MYDOCUMENTS, "\\My Games\\Skyrim Special Edition\\SKSE\\MyFirstPlugin.log");
-		gLog.SetPrintLevel(IDebugLog::kLevel_DebugMessage);
-		gLog.SetLogLevel(IDebugLog::kLevel_DebugMessage);
+		SKSE::Logger::OpenRelative(FOLDERID_Documents, L"\\My Games\\Skyrim Special Edition\\SKSE\\MyFirstPlugin.log");
+		SKSE::Logger::SetPrintLevel(SKSE::Logger::Level::kDebugMessage);
+		SKSE::Logger::SetFlushLevel(SKSE::Logger::Level::kDebugMessage);
 
 		_MESSAGE("MyFirstPlugin v%s", MYFP_VERSION_VERSTRING);
 
@@ -24,7 +22,13 @@ extern "C" {
 		if (a_skse->IsEditor()) {
 			_FATALERROR("[FATAL ERROR] Loaded in editor, marking as incompatible!\n");
 			return false;
-		} else if (a_skse->RuntimeVersion() != RUNTIME_VERSION_1_5_73) {
+		}
+
+		switch (a_skse->RuntimeVersion()) {
+		case RUNTIME_VERSION_1_5_73:
+		case RUNTIME_VERSION_1_5_80:
+			break;
+		default:
 			_FATALERROR("[FATAL ERROR] Unsupported runtime version %08X!\n", a_skse->RuntimeVersion());
 			return false;
 		}
