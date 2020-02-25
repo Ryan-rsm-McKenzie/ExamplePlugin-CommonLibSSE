@@ -1,9 +1,7 @@
-﻿#include "common/IDebugLog.h"  // IDebugLog
-#include "skse64_common/skse_version.h"  // RUNTIME_VERSION
-
-#include "version.h"  // VERSION_VERSTRING, VERSION_MAJOR
+﻿#include "version.h"
 
 #include "SKSE/API.h"
+#include "SKSE/Logger.h"
 
 
 extern "C" {
@@ -25,11 +23,9 @@ extern "C" {
 			return false;
 		}
 
-		switch (a_skse->RuntimeVersion()) {
-		case RUNTIME_VERSION_1_5_97:
-			break;
-		default:
-			_FATALERROR("Unsupported runtime version %08X!\n", a_skse->RuntimeVersion());
+		auto ver = a_skse->RuntimeVersion();
+		if (ver <= SKSE::RUNTIME_1_5_39) {
+			_FATALERROR("Unsupported runtime version %s!\n", ver.GetString().c_str());
 			return false;
 		}
 
