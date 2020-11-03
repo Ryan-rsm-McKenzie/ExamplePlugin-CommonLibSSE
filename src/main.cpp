@@ -1,7 +1,4 @@
-﻿#include "version.h"
-
-
-extern "C" DLLEXPORT bool SKSEAPI SKSEPlugin_Query(const SKSE::QueryInterface* a_skse, SKSE::PluginInfo* a_info)
+﻿extern "C" DLLEXPORT bool SKSEAPI SKSEPlugin_Query(const SKSE::QueryInterface* a_skse, SKSE::PluginInfo* a_info)
 {
 #ifndef NDEBUG
 	auto sink = std::make_shared<spdlog::sinks::msvc_sink_mt>();
@@ -27,11 +24,11 @@ extern "C" DLLEXPORT bool SKSEAPI SKSEPlugin_Query(const SKSE::QueryInterface* a
 	spdlog::set_default_logger(std::move(log));
 	spdlog::set_pattern("%g(%#): [%^%l%$] %v"s);
 
-	logger::info(FMT_STRING("MyFirstPlugin v{}"), MYFP_VERSION_VERSTRING);
+	logger::info("MyFirstPlugin v1.0.0");
 
 	a_info->infoVersion = SKSE::PluginInfo::kVersion;
 	a_info->name = "MyFirstPlugin";
-	a_info->version = MYFP_VERSION_MAJOR;
+	a_info->version = 1;
 
 	if (a_skse->IsEditor()) {
 		logger::critical("Loaded in editor, marking as incompatible"sv);

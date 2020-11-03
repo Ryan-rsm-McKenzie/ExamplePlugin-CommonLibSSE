@@ -1,0 +1,11 @@
+{
+  "name": "exampleproject",
+  "version-string": "1.0.0",
+  "description": "An example project built using CommonLibSSE",
+  "homepage": "https://github.com/Ryan-rsm-McKenzie/CommonLibSSE",
+  "license": "MIT",
+  "dependencies": [
+    "commonlibsse",
+    "spdlog"
+  ]
+}
