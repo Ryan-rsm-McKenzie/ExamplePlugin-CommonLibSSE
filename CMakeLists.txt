@@ -111,8 +111,7 @@ set(Boost_USE_STATIC_LIBS ON)
 set(Boost_USE_STATIC_RUNTIME ON)
 set(Boost_USE_DEBUG_RUNTIME ON)
 
-add_subdirectory($ENV{CommonLibSSEPath} CommonLibSSE)
-
+find_package(CommonLibSSE REQUIRED)
 find_package(spdlog REQUIRED)
 
 # ---- Add source files ----
@@ -145,7 +144,7 @@ add_library(${PROJECT_NAME} SHARED
 set_property(
 	TARGET
 		${PROJECT_NAME}
-		CommonLibSSE
+		CommonLibSSE::CommonLibSSE
 	PROPERTY
 		MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>"
 )
@@ -168,7 +167,7 @@ target_include_directories(${PROJECT_NAME}
 
 target_link_libraries(${PROJECT_NAME}
 	PUBLIC
-		CommonLibSSE
+		CommonLibSSE::CommonLibSSE
 		spdlog::spdlog
 )
 
