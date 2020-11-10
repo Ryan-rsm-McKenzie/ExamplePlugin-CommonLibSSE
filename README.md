@@ -14,6 +14,7 @@ This is a basic plugin template for use with CommonLibSSE
 * Open `x64 Native Tools Command Prompt`
 * Run `cmake`
 * Close the cmd window
+* Run `git submodule init`
 * Invoke the bootstrap file with powershell
 * Open the generated solution file in the `build` directory
 * Build the solution
