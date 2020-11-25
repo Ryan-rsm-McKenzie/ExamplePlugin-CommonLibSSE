@@ -10,11 +10,16 @@ This is a basic plugin template for use with CommonLibSSE
 	* C++ Clang tools for Windows
 	* Desktop development with C++
 
-## Building
+## Register Visual Studio as a Generator
 * Open `x64 Native Tools Command Prompt`
 * Run `cmake`
 * Close the cmd window
-* Run `git submodule init`
-* Invoke the bootstrap file with powershell
-* Open the generated solution file in the `build` directory
-* Build the solution
+
+## Building
+```
+git clone https://github.com/Ryan-rsm-McKenzie/ExamplePlugin-CommonLibSSE
+cd ExamplePlugin-CommonLibSSE
+git submodule update --init --recursive
+git submodule update --recursive --remote
+cmake -B build -S .
+```
