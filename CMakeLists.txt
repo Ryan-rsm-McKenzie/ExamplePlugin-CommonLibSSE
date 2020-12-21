@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.18)
 
 set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>" CACHE STRING "")
 set(CMAKE_TOOLCHAIN_FILE "$ENV{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake" CACHE STRING "")
-set(VCPKG_TARGET_TRIPLET "x64-windows-static-md" CACHE STRING "")
+set(VCPKG_TARGET_TRIPLET "x64-windows-static" CACHE STRING "")
 
 # ---- Project ----
 
@@ -141,14 +141,6 @@ add_library(${PROJECT_NAME} SHARED
 	${sources}
 	${CMAKE_CURRENT_BINARY_DIR}/version.rc
 	.clang-format
-)
-
-set_property(
-	TARGET
-		${PROJECT_NAME}
-		CommonLibSSE
-	PROPERTY
-		MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>DLL"
 )
 
 target_compile_features(${PROJECT_NAME}
