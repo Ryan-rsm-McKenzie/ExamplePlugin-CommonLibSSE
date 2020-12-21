@@ -5,6 +5,7 @@
   "homepage": "https://github.com/Ryan-rsm-McKenzie/ExamplePlugin-CommonLibSSE",
   "license": "MIT",
   "dependencies": [
+    "boost-atomic",
     "span-lite",
     "spdlog"
   ]
