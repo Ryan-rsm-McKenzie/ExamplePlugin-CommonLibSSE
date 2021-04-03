@@ -20,6 +20,5 @@ This is a basic plugin template for use with CommonLibSSE
 git clone https://github.com/Ryan-rsm-McKenzie/ExamplePlugin-CommonLibSSE
 cd ExamplePlugin-CommonLibSSE
 git submodule update --init --recursive
-git submodule update --recursive --remote
 cmake -B build -S .
 ```
