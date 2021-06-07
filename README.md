@@ -7,7 +7,6 @@ This is a basic plugin template for use with CommonLibSSE
 * [Vcpkg](https://github.com/microsoft/vcpkg)
 	* Add the environment variable `VCPKG_ROOT` with the value as the path to the folder containing vcpkg
 * [Visual Studio Community 2019](https://visualstudio.microsoft.com/)
-	* C++ Clang tools for Windows
 	* Desktop development with C++
 
 ## Register Visual Studio as a Generator
