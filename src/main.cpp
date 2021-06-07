@@ -1,4 +1,4 @@
-﻿extern "C" DLLEXPORT bool SKSEAPI SKSEPlugin_Query(const SKSE::QueryInterface* a_skse, SKSE::PluginInfo* a_info)
+extern "C" DLLEXPORT bool SKSEAPI SKSEPlugin_Query(const SKSE::QueryInterface* a_skse, SKSE::PluginInfo* a_info)
 {
 #ifndef NDEBUG
 	auto sink = std::make_shared<spdlog::sinks::msvc_sink_mt>();
@@ -8,7 +8,8 @@
 		return false;
 	}
 
-	*path /= "MyFirstPlugin.log"sv;
+	*path /= Version::PROJECT;
+	*path += ".log"sv;
 	auto sink = std::make_shared<spdlog::sinks::basic_file_sink_mt>(path->string(), true);
 #endif
 
@@ -24,11 +25,11 @@
 	spdlog::set_default_logger(std::move(log));
 	spdlog::set_pattern("%g(%#): [%^%l%$] %v"s);
 
-	logger::info("MyFirstPlugin v1.0.0");
+	logger::info(FMT_STRING("{} v{}"), Version::PROJECT, Version::NAME);
 
 	a_info->infoVersion = SKSE::PluginInfo::kVersion;
-	a_info->name = "MyFirstPlugin";
-	a_info->version = 1;
+	a_info->name = Version::PROJECT.data();
+	a_info->version = Version::MAJOR;
 
 	if (a_skse->IsEditor()) {
 		logger::critical("Loaded in editor, marking as incompatible"sv);
@@ -44,10 +45,9 @@
 	return true;
 }
 
-
 extern "C" DLLEXPORT bool SKSEAPI SKSEPlugin_Load(const SKSE::LoadInterface* a_skse)
 {
-	logger::info("MyFirstPlugin loaded");
+	logger::info("loaded");
 
 	SKSE::Init(a_skse);
 
