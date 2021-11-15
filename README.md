@@ -63,7 +63,7 @@ ExamplePlugin-CommonLibSSE\src\main.cpp(56): [info] loaded
 
 ### Project Name, Version, and Author
 > A tweak number of `.1` is automatically added to VR builds to distinguish from SSE (e.g., SSE build (1.0.0) vs VR build (1.0.0.1))
-* Edit lines 2-3 [CmakeLists.txt](CmakeLists.txt#L2-L3). This will take effect after the next run of `cmake`.
+* Edit lines 2-3 [CMakeLists.txt](CMakeLists.txt#L2-L3). This will take effect after the next run of `cmake`.
 * Edit [vcpkg.json](vcpkg.json) `name` and `version-string` sections.
 * Edit [LICENSE](LICENSE#L3) to change copyright author.
 
