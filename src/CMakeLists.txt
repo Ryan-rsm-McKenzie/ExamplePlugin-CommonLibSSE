@@ -71,7 +71,7 @@ target_include_directories(
 		"${SOURCE_DIR}"
 )
 
-add_subdirectory("${ROOT_DIR}/external/CommonLibSSE" CommonLibSSE)
+add_subdirectory("${ROOT_DIR}/external/CommonLibSSE" CommonLibSSE EXCLUDE_FROM_ALL)
 
 target_link_libraries(
 	"${PROJECT_NAME}"
@@ -83,6 +83,20 @@ target_precompile_headers(
 	"${PROJECT_NAME}"
 	PRIVATE
 		"${SOURCE_DIR}/PCH.h"
+)
+
+install(
+	FILES
+		"$<TARGET_FILE:${PROJECT_NAME}>"
+	DESTINATION "SKSE/Plugins"
+	COMPONENT "main"
+)
+
+install(
+	FILES
+		"$<TARGET_PDB_FILE:${PROJECT_NAME}>"
+	DESTINATION "/"
+	COMPONENT "pdbs"
 )
 
 if("${COPY_OUTPUT}")

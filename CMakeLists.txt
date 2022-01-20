@@ -27,4 +27,4 @@ option(COPY_OUTPUT "copy the output of build operations to the game directory" O
 list(APPEND CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake")
 
 add_subdirectory(src)
-include(cmake/archive_artifacts.cmake)
+include(cmake/packaging.cmake)
