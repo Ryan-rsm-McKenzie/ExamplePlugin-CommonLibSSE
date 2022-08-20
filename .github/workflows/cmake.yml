@@ -1,0 +1,46 @@
+name: CMake Build
+
+on:
+  push:
+    branches:
+      - "master"
+  pull_request:
+    branches:
+      - "master"
+  workflow_dispatch:
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        build_type: ["Release", "Debug"]
+    runs-on: windows-2022
+
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          submodules: "true"
+
+      - name: Clone vcpkg
+        uses: actions/checkout@v3
+        with:
+          repository: "microsoft/vcpkg"
+          path: ${{github.workspace}}/vcpkg
+
+      - name: Bootstrap vcpkg
+        run: ${{github.workspace}}/vcpkg/bootstrap-vcpkg.bat
+
+      - name: Configure CMake
+        run: cmake -B ${{github.workspace}}/build --preset vs2022-windows
+        env:
+          VCPKG_ROOT: ${{github.workspace}}/vcpkg
+          Skyrim64Path: ${{github.workspace}}/  # unused dummy variable
+
+      - name: Build CMake
+        run: cmake --build ${{github.workspace}}/build --config ${{matrix.build_type}}
+
+      - name: Create Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: ${{matrix.build_type}}_Build
+          path: ${{github.workspace}}/build/src/${{matrix.build_type}}/
