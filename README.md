@@ -12,11 +12,9 @@ This is a basic plugin template for use with CommonLibSSE
 
 ## Building
 ```
-git clone https://github.com/Ryan-rsm-McKenzie/ExamplePlugin-CommonLibSSE
+git clone --recurse-submodules https://github.com/Ryan-rsm-McKenzie/ExamplePlugin-CommonLibSSE
 cd ExamplePlugin-CommonLibSSE
-git submodule init
-git submodule update
-cmake --preset vs2022-windows
+cmake -B build --preset vs2022-windows
 cmake --build build --config Release
 ```
 
