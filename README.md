@@ -11,12 +11,25 @@ This is a basic plugin template for use with CommonLibSSE
 	* Desktop development with C++
 
 ## Building
+
+### Environment Variables
+Basic building requires the environment variable `VCPKG_ROOT` to be set to the location of your vspkg installation.
+This can be done either in [Windows system properties](https://docs.oracle.com/en/database/oracle/machine-learning/oml4r/1.5.1/oread/creating-and-modifying-environment-variables-on-windows.html)
+or temporarily for the currently running Powershell session **before** running cmake:
+```pwsh
+$env:VCPKG_ROOT = "C:\vcpkg"
 ```
-git clone https://github.com/Ryan-rsm-McKenzie/ExamplePlugin-CommonLibSSE
+
+Similary you can also set `Skyrim64Path`:
+```pwsh
+$env:Skyrim64Path = "C:\Program Files (x86)\Steam\steamapps\common\Skyrim Special Edition\" 
+```
+
+### Cloning and building
+```
+git clone --recurse-submodules https://github.com/Ryan-rsm-McKenzie/ExamplePlugin-CommonLibSSE
 cd ExamplePlugin-CommonLibSSE
-git submodule init
-git submodule update
-cmake --preset vs2022-windows
+cmake -B build --preset vs2022-windows
 cmake --build build --config Release
 ```
 
