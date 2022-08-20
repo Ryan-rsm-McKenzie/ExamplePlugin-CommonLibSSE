@@ -17,12 +17,14 @@ macro(set_from_environment VARIABLE)
 	endif()
 endmacro()
 
-set_from_environment(Skyrim64Path)
-if(NOT DEFINED Skyrim64Path)
-	message(FATAL_ERROR "Skyrim64Path is not set")
-endif()
-
 option(COPY_OUTPUT "copy the output of build operations to the game directory" OFF)
+
+if(COPY_OUTPUT)
+	set_from_environment(Skyrim64Path)
+	if(NOT DEFINED Skyrim64Path)
+		message(FATAL_ERROR "COPY_OUTPUT is set, but Skyrim64Path is not set")
+	endif()
+endif()
 
 list(APPEND CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake")
 
